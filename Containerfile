@@ -55,11 +55,11 @@ RUN BUILD_DATE=$(curl --fail --silent https://cdn.kde.org/kde-linux/packaging/bu
     cat /etc/pacman.d/mirrorlist && \
     printf '%s\n' \
         '[kde-linux]' \
-        'SigLevel = Never' \
+        'SigLevel = Optional TrustAll' \
         'Server = https://cdn.kde.org/kde-linux/packaging/packages/' \
         '' \
         '[kde-linux-debug]' \
-        'SigLevel = Never' \
+        'SigLevel = Optional TrustAll' \
         'Server = https://cdn.kde.org/kde-linux/packaging/packages-debug/' \
         >> /etc/pacman.conf
 
