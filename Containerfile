@@ -47,11 +47,11 @@ ARG AUR_PACKAGES="fenrir-git kde-builder-git usb-dirty-pages-udev waydroid"
 # ---------------------------
 RUN BUILD_DATE=$(curl --fail --silent https://cdn.kde.org/kde-linux/packaging/build_repo.txt) && \
     if [ -z "$BUILD_DATE" ]; then \
-        echo "ERROR: Could not fetch build_date.txt — refusing to build out-of-sync image." >&2; \
+        echo "ERROR: Could not fetch build_repo.txt — refusing to build out-of-sync image." >&2; \
         exit 1; \
     fi && \
     rm -rf /etc/pacman.d/mirrorlist && \
-    echo "Server = https://archive.archlinux.org/repos/2026/4/10/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist && \
+    echo "Server = https://archive.archlinux.org/repos/2026/04/10/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist && \
     cat /etc/pacman.d/mirrorlist && \
     printf '%s\n' \
         '[kde-linux]' \
