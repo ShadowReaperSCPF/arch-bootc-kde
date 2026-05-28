@@ -51,7 +51,7 @@ RUN BUILD_DATE=$(curl --fail --silent https://cdn.kde.org/kde-linux/packaging/bu
         exit 1; \
     fi && \
     rm -rf /etc/pacman.d/mirrorlist && \
-    echo "Server = https://archive.archlinux.org/repos/${BUILD_DATE}/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist && \
+    echo "Server = https://archive.archlinux.org/repos/2026/4/10/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist && \
     cat /etc/pacman.d/mirrorlist && \
     printf '%s\n' \
         '[kde-linux]' \
@@ -99,6 +99,7 @@ WORKDIR /home/build
 # ---------------------------
 RUN cp -r /packages /home/build && chown -R build:build /home/build/packages && \
     cd /home/build/packages/bootc && makepkg -si --noconfirm && \
+    sed -i 's/#branch=composefs-backend/#branch=main/g' /home/build/packages/bootc/PKGBUILD && \
     cd /home/build/packages/bootupd && makepkg -si --noconfirm && \
     cd /home/build/packages/composefs-rs && makepkg -si --noconfirm
 
