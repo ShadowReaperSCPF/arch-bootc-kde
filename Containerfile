@@ -45,21 +45,21 @@ ARG AUR_PACKAGES="fenrir-git kde-builder-git usb-dirty-pages-udev waydroid"
 # ---------------------------
 # Configure Arch snapshot and KDE Linux repo
 # ---------------------------
-RUN BUILD_DATE=$(curl --fail --silent https://cdn.kde.org/kde-linux/packaging/build_repo.txt) && \
+RUN BUILD_DATE=$(curl --fail --silent https://cdn.kde.org/kde-linux/packaging/build_repo           .txt) && \
     if [ -z "$BUILD_DATE" ]; then \
         echo "ERROR: Could not fetch build_repo.txt — refusing to build out-of-sync image." >&2; \
         exit 1; \
     fi && \
     rm -rf /etc/pacman.d/mirrorlist && \
-    echo "Server = https://pkgbuild.com\$repo/os/x86_64" > /etc/pacman.d/mirrorlist && \
+    echo "Server = https://archive.archlinux.org/repos/${BUILD_DATE}/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist && \
     cat /etc/pacman.d/mirrorlist && \
     printf '%s\n' \
         '[kde-linux]' \
-        'SigLevel = Optional TrustAll' \
+        'SigLevel = Never' \
         'Server = https://cdn.kde.org/kde-linux/packaging/packages/' \
         '' \
         '[kde-linux-debug]' \
-        'SigLevel = Optional TrustAll' \
+        'SigLevel = Never' \
         'Server = https://cdn.kde.org/kde-linux/packaging/packages-debug/' \
         >> /etc/pacman.conf
 
