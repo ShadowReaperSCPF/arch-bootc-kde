@@ -45,7 +45,7 @@ ARG AUR_PACKAGES="fenrir-git kde-builder-git usb-dirty-pages-udev waydroid"
 # ---------------------------
 # Configure Arch snapshot and KDE Linux repo
 # ---------------------------
-RUN BUILD_DATE=$(curl --fail --silent https://cdn.kde.org/kde-linux/packaging/build_date.txt) && \
+RUN BUILD_DATE=$(curl --fail --silent https://cdn.kde.org/kde-linux/packaging/build_repo.txt) && \
     if [ -z "$BUILD_DATE" ]; then \
         echo "ERROR: Could not fetch build_date.txt — refusing to build out-of-sync image." >&2; \
         exit 1; \
