@@ -45,9 +45,9 @@ ARG AUR_PACKAGES="fenrir-git kde-builder-git usb-dirty-pages-udev waydroid"
 # ---------------------------
 # Configure Arch snapshot and KDE Linux repo
 # ---------------------------
-RUN BUILD_DATE=$(curl --fail --silent https://cdn.kde.org/kde-linux/packaging/build_repo           .txt) && \
+RUN BUILD_DATE=$(curl --fail --silent https://cdn.kde.org/kde-linux/packaging/build_date.txt) && \
     if [ -z "$BUILD_DATE" ]; then \
-        echo "ERROR: Could not fetch build_repo.txt — refusing to build out-of-sync image." >&2; \
+        echo "ERROR: Could not fetch build_date.txt — refusing to build out-of-sync image." >&2; \
         exit 1; \
     fi && \
     rm -rf /etc/pacman.d/mirrorlist && \
@@ -98,7 +98,6 @@ WORKDIR /home/build
 # Build local PKGBUILDs (failures are fatal here; keep as-is)
 # ---------------------------
 RUN cp -r /packages /home/build && chown -R build:build /home/build/packages && \
-    sed -i 's/#branch=composefs-backend/#branch=main/g' /home/build/packages/bootc/PKGBUILD && \
     cd /home/build/packages/bootc && makepkg -si --noconfirm && \
     cd /home/build/packages/bootupd && makepkg -si --noconfirm && \
     cd /home/build/packages/composefs-rs && makepkg -si --noconfirm
@@ -120,7 +119,7 @@ RUN userdel build && mv /etc/sudoers.bak /etc/sudoers
 # Install all packages in grouped arrays
 # ---------------------------
 RUN pacman -Sy --noconfirm --refresh && \
-    pacman -S --noconfirm --overwrite="*" -dd\
+    pacman -S --noconfirm \
         $SYSTEM_PACKAGES \
         $KDE_PACKAGES \
         $FONT_PACKAGES \
