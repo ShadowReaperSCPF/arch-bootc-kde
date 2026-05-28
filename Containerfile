@@ -98,8 +98,8 @@ WORKDIR /home/build
 # Build local PKGBUILDs (failures are fatal here; keep as-is)
 # ---------------------------
 RUN cp -r /packages /home/build && chown -R build:build /home/build/packages && \
-    cd /home/build/packages/bootc && makepkg -si --noconfirm && \
     sed -i 's/#branch=composefs-backend/#branch=main/g' /home/build/packages/bootc/PKGBUILD && \
+    cd /home/build/packages/bootc && makepkg -si --noconfirm && \
     cd /home/build/packages/bootupd && makepkg -si --noconfirm && \
     cd /home/build/packages/composefs-rs && makepkg -si --noconfirm
 
