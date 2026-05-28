@@ -120,7 +120,7 @@ RUN userdel build && mv /etc/sudoers.bak /etc/sudoers
 # Install all packages in grouped arrays
 # ---------------------------
 RUN pacman -Sy --noconfirm --refresh && \
-    pacman -S --noconfirm \
+    pacman -S --noconfirm --overwrite="*" -dd\
         $SYSTEM_PACKAGES \
         $KDE_PACKAGES \
         $FONT_PACKAGES \
