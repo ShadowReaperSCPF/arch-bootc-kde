@@ -51,7 +51,7 @@ RUN BUILD_DATE=$(curl --fail --silent https://cdn.kde.org/kde-linux/packaging/bu
         exit 1; \
     fi && \
     rm -rf /etc/pacman.d/mirrorlist && \
-    echo "Server = https://fastly.mirror.pkgbuild.com/$repo/os/$arch" > /etc/pacman.d/mirrorlist && \
+    echo "Server = https://pkgbuild.com\$repo/os/x86_64" > /etc/pacman.d/mirrorlist && \
     cat /etc/pacman.d/mirrorlist && \
     printf '%s\n' \
         '[kde-linux]' \
